@@ -1,0 +1,31 @@
+name: Deploy React App
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment on push to main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest  # Run on an Ubuntu server
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3  # Checkout the code
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3  # Setup Node.js environment
+      with:
+        node-version: '16'  # Use Node.js version 16
+
+    - name: Install dependencies
+      run: npm install  # Install npm dependencies
+
+    - name: Build the app
+      run: npm run build  # Build the React app
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3  # Deploy the app to GitHub Pages
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub token for authentication
+        publish_dir: ./build  # Directory containing the built app
