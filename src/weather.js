@@ -48,7 +48,7 @@ const WeatherDashboard = () => {
         setForecast(dailyForecast);
       }
     } catch (error) {
-      setError("Error fetching weather data. Please try again later.");
+      setError("Error fetching weather data. Please try again.");
       console.error("Error fetching weather:", error);
     } finally {
       setLoading(false);
